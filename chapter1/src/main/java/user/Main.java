@@ -1,5 +1,8 @@
 package user;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import user.dao.DaoFactory;
 import user.dao.UserDao;
 import user.domain.User;
 
@@ -8,8 +11,8 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        UserDao dao = new UserDao();
-
+        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserDao dao = context.getBean("userDao", UserDao.class);
         User user = new User();
         user.setId("whiteship");
         user.setName("김형익");
