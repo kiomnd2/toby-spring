@@ -3,17 +3,23 @@ package user.dao;
 import user.domain.User;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserDao {
 
     private DataSource datasource;
 
+    UserDao() {
+
+    }
     public UserDao(DataSource datasource) {
         this.datasource = datasource;
     }
 
-    public void setConnectionMaker(DataSource datasource) {
+    public void setDatasource(DataSource datasource) {
         this.datasource = datasource;
     }
 

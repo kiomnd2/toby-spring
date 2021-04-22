@@ -1,9 +1,7 @@
 package user;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
-import user.dao.DaoFactory;
 import user.dao.UserDao;
 import user.domain.User;
 
@@ -17,7 +15,7 @@ public class Main {
 
         ApplicationContext context =
                 new GenericXmlApplicationContext("applicationContext.xml");
-        UserDao dao = context.getBean("UserDao", UserDao.class);
+        UserDao dao = context.getBean("userDao", UserDao.class);
 
         User user = new User();
         user.setId("whiteship");
@@ -28,12 +26,11 @@ public class Main {
 
         System.out.println("user.getId() = " + user.getId() + " 등록 성공");
 
-        User user2 = new User();
-        dao.get("a");
-        System.out.println("user2.getName() = " + user2.getName());
+        User user1 = dao.get("whiteship");
+        System.out.println("user2.getName() = " + user1.getName());
 
-        System.out.println("user2.getPassword() = " + user2.getPassword());
+        System.out.println("user2.getPassword() = " + user1.getPassword());
 
-        System.out.println("user2.getId() = " + user2.getId()+ " 조회성공");
+        System.out.println("user2.getId() = " + user1.getId()+ " 조회성공");
     }
 }
