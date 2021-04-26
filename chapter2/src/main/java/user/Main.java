@@ -1,0 +1,36 @@
+package user;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import user.dao.UserDao;
+import user.domain.User;
+
+import java.sql.SQLException;
+
+public class Main {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
+//        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+//        UserDao dao = context.getBean("userDao", UserDao.class);
+
+        ApplicationContext context =
+                new GenericXmlApplicationContext("applicationContext.xml");
+        UserDao dao = context.getBean("userDao", UserDao.class);
+
+        User user = new User();
+        user.setId("whiteship");
+        user.setName("김형익");
+        user.setPassword("qwer1234");
+
+        dao.add(user);
+
+        System.out.println("user.getId() = " + user.getId() + " 등록 성공");
+
+        User user1 = dao.get("whiteship");
+        System.out.println("user2.getName() = " + user1.getName());
+
+        System.out.println("user2.getPassword() = " + user1.getPassword());
+
+        System.out.println("user2.getId() = " + user1.getId()+ " 조회성공");
+    }
+}
